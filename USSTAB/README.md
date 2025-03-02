@@ -7,7 +7,7 @@ VTAM (Virtual Telecommunications Access Method) の一部であり、USS (Unform
 
 # DEMO
 
-![USSTAB](/image/20250302-175458.png) -> O.K.
+![USSTAB](20250302-175458.png) -> O.K.
 
 
 # Requirement
