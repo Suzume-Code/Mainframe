@@ -5,8 +5,6 @@ USSTAB is part of VTAM (Virtual Telecommunications Access Method) and refers to 
 VTAM (Virtual Telecommunications Access Method) の一部であり、USS (Unformatted System Services) テーブルを指します。USSTABは、VTAMが論理ユニット (LU) から受信する文字コード化された入力を処理するために使用されます。USSTABは、依存する論理ユニットに対してのみ有効です。
 
 
-# DEMO
-
 ![USSTAB](20250302-175458.png) -> O.K.
 
 
