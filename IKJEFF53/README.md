@@ -5,3 +5,13 @@ In a multilevel secure system, the default IKJEFF53 exit routine provided by IBM
 
 TSO/Eのインストール出口ルーチンであるIKJEFF53は、CANCELコマンドやOUTPUTコマンドの動作をカスタマイズするために使用されます。デフォルトの出口ルーチンは、ユーザーが他のユーザーのジョブをキャンセルしたり、他のユーザーのジョブの出力を処理したりする際に制御を受け取ります。
 マルチレベルセキュアシステムでは、JESJOBSおよびJESSPOOLリソースクラスを使用してジョブ名の制限を制御するために、IBMが提供するデフォルトのIKJEFF53出口ルーチンをSYS1.SAMPLIBにある非デフォルトの出口ルーチンに置き換える必要があります。
+
+# Installation
+
+IKJEFF53.ASM
+
+Line 253-254: Comment out.
+Line 258-259: Comment out.
+Line 266-267: Comment out.
+Line 271-272: Comment out.
+Line 273    : Add Branch.

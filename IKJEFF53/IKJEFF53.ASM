@@ -79,14 +79,14 @@
 *      PURPOSE = SEE FUNCTION
 *
 *      LINKAGE =
-*         From IKJEFF51 (CANCEL OR STATUS COMMAND) VIA CALL.
-*         From IKJCT469 (OUTPUT COMMAND) VIA CALL.
+*         FROM IKJEFF51 (CANCEL OR STATUS COMMAND) VIA CALL.
+*         FROM IKJCT469 (OUTPUT COMMAND) VIA CALL.
 *
 *      INPUT = REGISTER 1 POINTS TO THE PARAMETER LIST
 *              FOR A DESCRIPTION OF THE PARM LIST, SEE IKJEFFIE MACRO
 *
 *      REGISTERS SAVED = 0 - 12 AND 14 - 15
-*      REGISTERS USED =  All
+*      REGISTERS USED =  ALL
 *      REGISTERS RESTORED = 0 - 14
 *
 *   EXIT - NORMAL = AT END OF PROGRAM, TO CALLER VIA BR 14
@@ -96,7 +96,7 @@
 *
 *   EXIT - ERROR =  AT END OF PROGRAM, TO CALLER VIA BR 14
 *      CONDITIONS = SEE OPERATION
-*      OUTPUT = MESSAGEP set in the input parameter list
+*      OUTPUT = MESSAGEP SET IN THE INPUT PARAMETER LIST
 *      RETURN CODE = (POSSIBLE RETURN CODES)
 *          4 - ISSUE PROMPT MESSAGE AND RETURN REPLY
 *          8 - ISSUE PUTLINE MESSAGE AND RETURN
@@ -218,19 +218,19 @@ ISCANCEL EQU   *                    COMMAND IS CANCEL
 * THAT THE FEATURE OF JESJOBS JOB "OWNERSHIP" IS NOT RESTRICTED BY
 * THIS EXIT TO JOBNAMES THAT BEGIN WITH USERID.
 *
-         RACROUTE REQUEST=STAT,     Request status            @PMH0156 +
-               CLASS=JOBS,          Check JESJOBS class       @PMH0156 +
-               RELEASE=1.9,         Use proper release        @PMH0156 +
-               WORKA=SAFWA,         Supply a work area        @PMH0156 +
-               MF=(E,STATWAD)       Specify status work area  @YA64055
-         LTR   R15,R15              Check for request done    @PMH0156
-         BNZ   CHECK_JOBNAME        Request not done, we must @PMH0156
-*                                   do the checking           @PMH0156
-         LA    R10,STATWAD          Get SAF parameter area    @YA64055
-         USING SAFP,R10             Establish addressability  @PMH0156
-         L     R09,SAFPRRET         Get STAT return code      @PMH0156
-         LTR   R09,R09              Check for class active    @PMH0156
-         BZ    RETURN_TO_CALLER     Class is active, nothing to do
+         RACROUTE REQUEST=STAT,     REQUEST STATUS            @PMH0156 +
+               CLASS=JOBS,          CHECK JESJOBS CLASS       @PMH0156 +
+               RELEASE=1.9,         USE PROPER RELEASE        @PMH0156 +
+               WORKA=SAFWA,         SUPPLY A WORK AREA        @PMH0156 +
+               MF=(E,STATWAD)       SPECIFY STATUS WORK AREA  @YA64055
+         LTR   R15,R15              CHECK FOR REQUEST DONE    @PMH0156
+         BNZ   CHECK_JOBNAME        REQUEST NOT DONE, WE MUST @PMH0156
+*                                   DO THE CHECKING           @PMH0156
+         LA    R10,STATWAD          GET SAF PARAMETER AREA    @YA64055
+         USING SAFP,R10             ESTABLISH ADDRESSABILITY  @PMH0156
+         L     R09,SAFPRRET         GET STAT RETURN CODE      @PMH0156
+         LTR   R09,R09              CHECK FOR CLASS ACTIVE    @PMH0156
+         BZ    RETURN_TO_CALLER     CLASS IS ACTIVE, NOTHING TO DO
 CHECK_JOBNAME EQU *
 *
 * IF NO MESSAGE ISSUED FOR LAST ENTRY
@@ -277,26 +277,26 @@ JOBNAME_INVALID EQU *
 *
          L     R00,GETMINFO         SUBPOOL AND LENGTH OF MESSAGE AREA
          GETMAIN R,LV=(0)               GET MESSAGE BUFFER
-         ST    R01,MESSAGEP(,IEPTR) Move msg buff ptr to parm list
+         ST    R01,MESSAGEP(,IEPTR) MOVE MSG BUFF PTR TO PARM LIST
          L     R10,MESSAGEP(,IEPTR)
-         MVI   REJMSG(R10),C' '     Move in one blank
-         MVC   REJMSG+1(83,R10),REJMSG(R10) Init buffer with blanks
-         MVC   REJMLEN(2,R10),MSGLENTH Maximum length
-         MVI   REJJOB+3(R10),C' '   Move in one blank
-         MVC   REJJOB(3,R10),JOBCONST Put in "JOB"
+         MVI   REJMSG(R10),C' '     MOVE IN ONE BLANK
+         MVC   REJMSG+1(83,R10),REJMSG(R10) INIT BUFFER WITH BLANKS
+         MVC   REJMLEN(2,R10),MSGLENTH MAXIMUM LENGTH
+         MVI   REJJOB+3(R10),C' '   MOVE IN ONE BLANK
+         MVC   REJJOB(3,R10),JOBCONST PUT IN "JOB"
          L     R01,NAMELENP(,IEPTR)
-         LH    R02,JOBNAMEL(,R01)   Get JOBNAME length
-         LR    R03,R02              Make a copy
-         BCTR  R03,0                Subtract for "execute"
+         LH    R02,JOBNAMEL(,R01)   GET JOBNAME LENGTH
+         LR    R03,R02              MAKE A COPY
+         BCTR  R03,0                SUBTRACT FOR "EXECUTE"
          L     R01,JOBNAMEP(,IEPTR)
-         EX    R03,MOVE_JOBNAME     Insert the bad JOBNAME
-         AL    R02,TWO              Get offset of blank after JOBNAME
-         LR    TEMPOFST,R02         Index past blank after JOBNAME
+         EX    R03,MOVE_JOBNAME     INSERT THE BAD JOBNAME
+         AL    R02,TWO              GET OFFSET OF BLANK AFTER JOBNAME
+         LR    TEMPOFST,R02         INDEX PAST BLANK AFTER JOBNAME
          L     R01,CODEP(,IEPTR)
-         CLI   CMNDCODE(R01),CANCEL Command is CANCEL
+         CLI   CMNDCODE(R01),CANCEL COMMAND IS CANCEL
          BNE   DO_OUTPT             MUST BE OUTPUT
          ALR   R10,TEMPOFST
-         MVC   REJSLOT-1(66,R10),REJTEXT1 Move in reason for rejection
+         MVC   REJSLOT-1(66,R10),REJTEXT1 MOVE IN REASON FOR REJECTION
          B     SET_RC
 DO_OUTPT L     R10,MESSAGEP(,IEPTR)
          ALR   R10,TEMPOFST
@@ -317,14 +317,14 @@ RETURN_TO_CALLER EQU *
 *
 * RETURN TO CALLER (STATUS, CANCEL, OR OUTPUT COMMAND)
 *
-         L     R13,4(,R13)          Get previous savearea
-         L     R00,DYNSIZE          Size for FREEMAIN
-         LR    R01,R11              Address for FREEMAIN
+         L     R13,4(,R13)          GET PREVIOUS SAVEAREA
+         L     R00,DYNSIZE          SIZE FOR FREEMAIN
+         LR    R01,R11              ADDRESS FOR FREEMAIN
          FREEMAIN R,LV=(0),A=(1)
-         LR    R15,RETCODE          Set Return Code
-         L     R14,12(,R13)         Restore Retreg
-         LM    R00,R12,20(R13)      Restore rest of regs
-         BR    R14                  Return
+         LR    R15,RETCODE          SET RETURN CODE
+         L     R14,12(,R13)         RESTORE RETREG
+         LM    R00,R12,20(R13)      RESTORE REST OF REGS
+         BR    R14                  RETURN
 *
 * DYNAMIC AREA OF MODULE DATA
 *
