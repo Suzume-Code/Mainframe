@@ -10,8 +10,8 @@ TSO/Eのインストール出口ルーチンであるIKJEFF53は、CANCELコマ�
 
 IKJEFF53.ASM
 
-Line 253-254: Comment out.
-Line 258-259: Comment out.
-Line 266-267: Comment out.
-Line 271-272: Comment out.
-Line 273    : Add Branch.
+* Line 253-254: Comment out.
+* Line 258-259: Comment out.
+* Line 266-267: Comment out.
+* Line 271-272: Comment out.
+* Line 273    : Add Branch.
